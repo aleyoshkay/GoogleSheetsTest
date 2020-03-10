@@ -25,8 +25,6 @@ public class CreateSheetsPost  {
 
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
-        System.out.println(response.body());
         Assert.assertEquals(200, response.statusCode());
         Assert.assertTrue(response.body().contains(" \"title\": \"2342\","));
 
@@ -46,8 +44,6 @@ public class CreateSheetsPost  {
 
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
-        System.out.println(response.body());
         Assert.assertEquals(200, response.statusCode());
         Assert.assertTrue(response.body().contains(" \"title\": \"Новый документ\","));
 
@@ -65,8 +61,6 @@ public class CreateSheetsPost  {
 
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
-        System.out.println(response.body());
         Assert.assertEquals(400, response.statusCode());
     }
 
@@ -82,8 +76,6 @@ public class CreateSheetsPost  {
 
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
-        System.out.println(response.body());
         Assert.assertEquals(401, response.statusCode());
 
     }
@@ -99,8 +91,6 @@ public class CreateSheetsPost  {
 
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
-        System.out.println(response.body());
         Assert.assertEquals(400, response.statusCode());
         Assert.assertTrue(response.body().contains("\"message\": \"Invalid value at 'title' (TYPE_STRING), 2342\","));
 
