@@ -16,79 +16,65 @@ public class CreateSheetsPost  {
     @Test
     public void createSheetsValidTitle() throws IOException, InterruptedException {
         String inputJson = "{ \"title\":\"2342\" }";
-
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(postEndpoint))
                 .header("Authorization", "Bearer " + accesToken)
                 .POST(HttpRequest.BodyPublishers.ofString(inputJson))
                 .build();
-
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Assert.assertEquals(200, response.statusCode());
         Assert.assertTrue(response.body().contains(" \"title\": \"2342\","));
-
-
     }
 
     @Test
     public void createSheetsEmptyJson() throws IOException, InterruptedException {
-
-        String inputJson2 = "{}";
-
+        String inputJson = "{}";
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(postEndpoint))
                 .header("Authorization", "Bearer " + accesToken)
-                .POST(HttpRequest.BodyPublishers.ofString(inputJson2))
+                .POST(HttpRequest.BodyPublishers.ofString(inputJson))
                 .build();
-
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Assert.assertEquals(200, response.statusCode());
         Assert.assertTrue(response.body().contains(" \"title\": \"Новый документ\","));
-
     }
 
     @Test
-    public void PostRequestInvalidApiKey() throws IOException, InterruptedException {
-        String inputJson2 = "{}";
-
+    public void postRequestInvalidApiKey() throws IOException, InterruptedException {
+        String inputJson = "{}";
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(postEndpoint + "1"))
                 .header("Authorization", "Bearer " + accesToken)
-                .POST(HttpRequest.BodyPublishers.ofString(inputJson2))
+                .POST(HttpRequest.BodyPublishers.ofString(inputJson))
                 .build();
-
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Assert.assertEquals(400, response.statusCode());
     }
 
     @Test
-    public void PostRequestInvalidAuthToken() throws IOException, InterruptedException {
-        String inputJson2 = "{}";
-
+    public void postRequestInvalidAuthToken() throws IOException, InterruptedException {
+        String inputJson = "{}";
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(postEndpoint))
                 .header("Authorization", "Bearer " + accesToken + "1")
-                .POST(HttpRequest.BodyPublishers.ofString(inputJson2))
+                .POST(HttpRequest.BodyPublishers.ofString(inputJson))
                 .build();
-
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Assert.assertEquals(401, response.statusCode());
-
     }
+
     @Test
     public void PostRequestInvalidTitle() throws IOException, InterruptedException {
-        String inputJson2 = "{ \"title\":2342 }";
-
+        String inputJson = "{ \"title\":2342 }";
         var request = HttpRequest.newBuilder()
                 .uri(URI.create(postEndpoint))
                 .header("Authorization", "Bearer " + accesToken)
-                .POST(HttpRequest.BodyPublishers.ofString(inputJson2))
+                .POST(HttpRequest.BodyPublishers.ofString(inputJson))
                 .build();
-
         var client = HttpClient.newHttpClient();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Assert.assertEquals(400, response.statusCode());
